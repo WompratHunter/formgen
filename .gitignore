@@ -9,6 +9,11 @@ out-tsc
 node_modules
 .venv
 
+# Python
+__pycache__/
+*.py[cod]
+.env
+
 # IDEs and editors
 /.idea
 .project
