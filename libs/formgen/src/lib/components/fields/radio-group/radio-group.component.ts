@@ -1,0 +1,37 @@
+import { Component, Input } from '@angular/core';
+import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
+import { RenderableField } from '../../../types/renderable-form';
+
+@Component({
+  selector: 'formgen-radio-group',
+  standalone: true,
+  imports: [ReactiveFormsModule, MatRadioModule],
+  template: `
+    <div class="formgen-radio-wrapper">
+      <label class="formgen-radio-label">{{ field.label }}</label>
+      <mat-radio-group [formControl]="asFormControl" class="formgen-radio-group">
+        @for (option of field.options; track option.value) {
+          <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
+        }
+      </mat-radio-group>
+      @if (field.hint) {
+        <div class="formgen-field-hint">{{ field.hint }}</div>
+      }
+    </div>
+  `,
+  styles: [
+    `.formgen-radio-wrapper { display: flex; flex-direction: column; padding: 8px 0; }`,
+    `.formgen-radio-label { font-size: 14px; color: rgba(0,0,0,.6); margin-bottom: 8px; }`,
+    `.formgen-radio-group { display: flex; flex-direction: column; gap: 4px; }`,
+    `.formgen-field-hint { font-size: 12px; color: rgba(0,0,0,.6); margin-top: 4px; }`,
+  ],
+})
+export class RadioGroupComponent {
+  @Input() field!: RenderableField;
+  @Input() control!: AbstractControl;
+
+  get asFormControl() {
+    return this.control as import('@angular/forms').FormControl;
+  }
+}
