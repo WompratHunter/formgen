@@ -35,16 +35,16 @@ You are implementing the FormGen POC described in `formgen-poc-plan.md`, which l
 ### Phase 1 — Shared Kernel (RenderableForm)
 
 - [x] ✅ **1.1** `shared/renderable_form.py` defined — Pydantic schema imports cleanly, no errors on `python -c "from shared.renderable_form import RenderableForm"`
-- [ ] **1.2** `RenderableForm` TypeScript interfaces defined in formgen library
-- [ ] **1.3** `FormBuilderService` implemented — takes `RenderableForm`, returns `FormGroup`
-- [ ] **1.4** `ValidatorFactoryService` implemented — maps `ValidatorConfig[]` → Angular `Validators`
-- [ ] ✅ **1.5** `FormgenFormComponent` built — accepts `[config]: RenderableForm`, renders inside a MatCard with no compilation errors
-- [ ] **1.6** Field components built: `text`, `textarea`, `select`, `checkbox`
-- [ ] **1.7** `FormFieldFactory` implemented — resolves field type to component dynamically
-- [ ] **1.8** `CssSelectorGeneratorService` implemented
-- [ ] **1.9** `LayoutEngine` implemented — CSS Grid from `RenderableLayout`
-- [ ] **1.10** Form actions implemented — submit button emits value via `@Output`
-- [ ] ✅ **1.11** Formgen library builds cleanly — `ng build` produces `dist/` with no errors; hardcoded `RenderableForm` fixture renders a visible form in the Playground app
+- [x] **1.2** `RenderableForm` TypeScript interfaces defined in formgen library
+- [x] **1.3** `FormBuilderService` implemented — takes `RenderableForm`, returns `FormGroup`
+- [x] **1.4** `ValidatorFactoryService` implemented — maps `ValidatorConfig[]` → Angular `Validators`
+- [x] ✅ **1.5** `FormgenFormComponent` built — accepts `[config]: RenderableForm`, renders inside a MatCard with no compilation errors
+- [x] **1.6** Field components built: `text`, `textarea`, `select`, `checkbox`, `radio`
+- [x] **1.7** `FormFieldFactory` implemented — resolves field type to component dynamically
+- [x] **1.8** `CssSelectorGeneratorService` implemented
+- [x] **1.9** `LayoutEngine` implemented — CSS Grid from `RenderableLayout`
+- [x] **1.10** Form actions implemented — submit/reset buttons emit value via `@Output`
+- [x] ✅ **1.11** Formgen library builds cleanly — `ng build` produces `dist/` with no errors; hardcoded `RenderableForm` fixture renders a visible form in the Playground app
 
 ---
 
