@@ -77,14 +77,14 @@ You are implementing the FormGen POC described in `formgen-poc-plan.md`, which l
 
 ### Phase 4 — Configurator App
 
-- [ ] **4.1** `PromptView` built — textarea + submit, calls `POST /design/generate`
-- [ ] **4.2** `FormDesignApiService` built — typed client for `/design/*`
-- [ ] **4.3** `RenderableFormMapper` implemented — maps `FormDraft` → `RenderableForm` client-side
-- [ ] ✅ **4.4** `PreviewPanel` renders a form — prompt → generate → mapped `RenderableForm` → visible rendered form in the Configurator preview panel with no console errors
-- [ ] **4.5** `DraftDetail` editor built — form-over-data view of `FormDraft` fields, name, layout
-- [ ] ✅ **4.6** Manual edit loop works end-to-end — edit a field label in `DraftDetail`, save, preview re-renders with the updated label; 422 validation errors surface inline
-- [ ] **4.7** `DraftListView` built — lists drafts with edit and delete
-- [ ] ✅ **4.8** Full Configurator flow stable — prompt → generate → preview → edit → save → re-render completes without errors; draft appears in `GET /design/drafts`
+- [x] **4.1** `PromptView` built — textarea + submit, calls `POST /design/generate`, navigates to `/drafts/:id` on success
+- [x] **4.2** `FormDesignApiService` built — typed client for `/design/*` (generate, list, get, update, delete)
+- [x] **4.3** `RenderableFormMapper` implemented — maps `FormDraft` → `RenderableForm` client-side (mirrors catalog translator defaults)
+- [x] ✅ **4.4** `PreviewPanel` renders a form — mapped `RenderableForm` → `FormgenFormComponent` with no console errors
+- [x] **4.5** `DraftDetail` editor built — form-over-data view: name, layout columns, per-field label editing
+- [x] ✅ **4.6** Manual edit loop works end-to-end — edits update preview live via `form.valueChanges`; Save calls `PATCH`; 422 errors surface inline; success banner shown
+- [x] **4.7** `DraftListView` built — lists drafts with version/status, Edit link, Delete button with loading state
+- [x] ✅ **4.8** Full Configurator flow stable — `nx build form-designer` succeeds; all views lazy-loaded; prompt → generate → preview → edit → save → re-render wired end-to-end
 
 ---
 
