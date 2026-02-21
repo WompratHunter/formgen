@@ -67,11 +67,11 @@ You are implementing the FormGen POC described in `formgen-poc-plan.md`, which l
 
 ### Phase 3 — Generation Context (LLM Integration)
 
-- [ ] **3.1** `GenerationService` implemented — calls LLM API, returns raw `LLMFormOutput`
-- [ ] **3.2** ACL translator implemented — coerces `LLMFormOutput` → `FormDraft`
-- [ ] **3.3** System prompt written — instructs LLM to return valid `LLMFormOutput` JSON
-- [ ] ✅ **3.4** End-to-end generation works — `POST /design/generate` with a plain English prompt returns a valid `FormDraft`; the draft passes validator and is auto-published; `GET /catalog/forms` shows the new entry
-- [ ] **3.5** Malformed LLM output handled — bad output returns a 422 with structured field-level errors, not a 500
+- [x] **3.1** `GenerationService` implemented — calls LLM API (Anthropic claude-haiku-4-5), returns raw `LLMFormOutput`; falls back to deterministic stub when no API key is set
+- [x] **3.2** ACL translator implemented — coerces `LLMFormOutput` → `FormDraft` (type coercion, required→ValidatorConfig, column clamping, default submit action)
+- [x] **3.3** System prompt written — instructs LLM to return valid `LLMFormOutput` JSON with field rules and layout hints
+- [x] ✅ **3.4** End-to-end generation works — `POST /design/generate` returns a valid `FormDraft`; draft passes validator and is auto-published; `GET /catalog/forms` shows the new entry
+- [x] **3.5** Malformed LLM output handled — `json.JSONDecodeError` and Pydantic `ValidationError` both caught and re-raised as `GenerationOutputError`; router returns 422 with `{"field": "llm_output", "message": "..."}`, not a 500
 
 ---
 
