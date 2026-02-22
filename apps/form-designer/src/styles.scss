@@ -16,6 +16,11 @@ html {
     typography: Roboto,
     density: 0,
   ));
+
+  // Remove border radii from nav list items (hover, focus, active ripple states)
+  --mat-list-list-item-container-shape: 0;
+  // Remove border radius from the sidenav drawer
+  --mat-sidenav-container-shape: 0;
 }
 
 body {
