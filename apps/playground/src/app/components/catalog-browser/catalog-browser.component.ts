@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, signal, computed } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -33,7 +33,7 @@ export class CatalogBrowserComponent implements OnInit {
     );
   });
 
-  constructor(private api: FormCatalogApiService) {}
+  private api = inject(FormCatalogApiService);
 
   ngOnInit(): void {
     this.api.listForms().subscribe({

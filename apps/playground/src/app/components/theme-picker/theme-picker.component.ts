@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms';
 import { ThemeService } from '../../services/theme.service';
-import { Theme } from '../../models/catalog';
 
 @Component({
   selector: 'app-theme-picker',
@@ -24,7 +23,7 @@ import { Theme } from '../../models/catalog';
   `],
 })
 export class ThemePickerComponent {
-  constructor(public themeService: ThemeService) {}
+  themeService = inject(ThemeService);
 
   onThemeChange(themeId: string): void {
     const theme = this.themeService.themes.find(t => t.id === themeId);

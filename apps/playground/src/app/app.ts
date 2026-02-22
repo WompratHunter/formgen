@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RenderableForm } from '@formgen/ui';
@@ -18,10 +18,9 @@ import { ThemePickerComponent } from './components/theme-picker/theme-picker.com
   styleUrl: './app.scss',
 })
 export class App {
+  private catalogApi = inject(FormCatalogApiService);
   renderableForm = signal<RenderableForm | null>(null);
   loadingForm = signal(false);
-
-  constructor(private catalogApi: FormCatalogApiService) {}
 
   onFormSelected(id: string): void {
     this.loadingForm.set(true);

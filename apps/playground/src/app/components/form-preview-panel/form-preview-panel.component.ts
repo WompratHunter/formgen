@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, signal } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject, signal } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormgenFormComponent, RenderableForm, CssSelectorGeneratorService, FormSelectors } from '@formgen/ui';
 import { CssSelectorsDisplayComponent } from '../css-selectors-display/css-selectors-display.component';
@@ -36,7 +36,7 @@ export class FormPreviewPanelComponent implements OnChanges {
   form = signal<RenderableForm | null>(null);
   selectors = signal<FormSelectors | null>(null);
 
-  constructor(private selectorGenerator: CssSelectorGeneratorService) {}
+  private selectorGenerator = inject(CssSelectorGeneratorService);
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['renderableForm']) {
