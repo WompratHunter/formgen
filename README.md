@@ -44,6 +44,19 @@ libs/        # Shared libraries
 design/      # Design documentation and references
 ```
 
+## API Environment Variables
+
+Copy `apps/api/.env` and populate the values before running the API.
+
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `DATABASE_URL` | No | `postgresql://formgen:formgen@localhost:5432/formgen` | PostgreSQL connection string |
+| `GEMINI_API_KEY` | Yes* | — | API key for Gemini |
+| `LLM_BASE_URL` | Yes* | — | OpenAI-compatible base URL for the LLM provider |
+| `LLM_MODEL` | Yes* | — | Model identifier (e.g. `gemini-2.5-flash`) |
+
+*If omitted, the generation service falls back to a stub response.
+
 ## Learn More
 
 - [Nx Documentation](https://nx.dev)

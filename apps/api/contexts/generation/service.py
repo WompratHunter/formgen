@@ -1,6 +1,6 @@
 import json
 import os
-import anthropic
+from openai import OpenAI
 from pydantic import ValidationError
 from contexts.generation.schemas import LLMFormOutput
 from shared.errors import GenerationOutputError
@@ -37,20 +37,24 @@ Rules:
 
 class GenerationService:
     def __init__(self):
-        api_key = os.getenv("ANTHROPIC_API_KEY")
-        self.client = anthropic.Anthropic(api_key=api_key) if api_key else None
+        api_key = os.getenv("GEMINI_API_KEY")
+        base_url = os.getenv("LLM_BASE_URL")
+        self.model = os.getenv("LLM_MODEL", "gemini-2.5-flash")
+        self.client = OpenAI(api_key=api_key, base_url=base_url) if api_key else None
 
     def generate(self, prompt: str) -> LLMFormOutput:
         if not self.client:
             return self._stub(prompt)
 
-        message = self.client.messages.create(
-            model="claude-haiku-4-5-20251001",
+        response = self.client.chat.completions.create(
+            model=self.model,
             max_tokens=2048,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": prompt},
+            ],
         )
-        raw = message.content[0].text.strip()
+        raw = response.choices[0].message.content.strip()
 
         try:
             data = json.loads(raw)
