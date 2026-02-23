@@ -3,7 +3,7 @@
   <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
     <mat-label>Search</mat-label>
     <mat-icon matPrefix>search</mat-icon>
-    <input matInput [value]="searchQuery()" (input)="searchQuery.set($any($event.target).value)" />
+    <input #searchInput matInput [value]="searchQuery()" (input)="searchQuery.set($any($event.target).value)" aria-label="Search forms" />
   </mat-form-field>
 </div>
 
@@ -17,6 +17,9 @@
       <mat-list-item
         [class.selected]="selectedId() === entry.id"
         (click)="select(entry)"
+        [matTooltip]="entry.description || ''"
+        matTooltipPosition="right"
+        [matTooltipDisabled]="!entry.description"
       >
         <span matListItemTitle>{{ entry.name }}</span>
         <span matListItemLine class="entry-date">{{ formatDate(entry.published_at) }}</span>
