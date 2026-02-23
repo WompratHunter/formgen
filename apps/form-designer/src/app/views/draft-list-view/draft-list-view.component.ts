@@ -4,16 +4,19 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatChipsModule } from '@angular/material/chips';
 import { FormDesignApiService } from '../../services/form-design-api.service';
 import { DraftSummary } from '../../models/form-draft';
+import { EmptyStateComponent } from '../../components/empty-state/empty-state.component';
 
 @Component({
   selector: 'app-draft-list-view',
   standalone: true,
   imports: [
     RouterModule, MatCardModule, MatButtonModule,
-    MatIconModule, MatProgressSpinnerModule, MatChipsModule,
+    MatIconModule, MatProgressSpinnerModule, MatProgressBarModule,
+    MatChipsModule, EmptyStateComponent,
   ],
   templateUrl: './draft-list-view.component.html',
   styleUrl: './draft-list-view.component.scss',
@@ -32,7 +35,13 @@ export class DraftListViewComponent implements OnInit {
   private loadDrafts(): void {
     this.loading.set(true);
     this.api.listDrafts().subscribe({
-      next: (drafts) => { this.drafts.set(drafts); this.loading.set(false); },
+      next: (drafts) => {
+        const sorted = [...drafts].sort(
+          (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+        );
+        this.drafts.set(sorted);
+        this.loading.set(false);
+      },
       error: () => this.loading.set(false),
     });
   }
