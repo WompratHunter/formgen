@@ -1,5 +1,5 @@
 <div class="browser-header">
-  <h3 class="browser-title">Form Catalog</h3>
+  <h2 class="browser-title">Form Catalog</h2>
   <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
     <mat-label>Search</mat-label>
     <mat-icon matPrefix aria-hidden="true">search</mat-icon>
@@ -8,7 +8,7 @@
 </div>
 
 @if (loading()) {
-  <div class="browser-loading"><mat-spinner diameter="32" /></div>
+  <div class="browser-loading" aria-live="polite"><mat-spinner diameter="32" aria-label="Loading catalog" /></div>
 } @else if (!filteredEntries().length) {
   <p class="browser-empty">No forms found.</p>
 } @else {
