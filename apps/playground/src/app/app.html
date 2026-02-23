@@ -7,7 +7,7 @@
     (click)="toggleDarkMode()"
     [attr.aria-label]="darkMode() ? 'Switch to light mode' : 'Switch to dark mode'"
     [matTooltip]="darkMode() ? 'Light mode' : 'Dark mode'">
-    <mat-icon>{{ darkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    <mat-icon aria-hidden="true">{{ darkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
   </button>
 </mat-toolbar>
 
